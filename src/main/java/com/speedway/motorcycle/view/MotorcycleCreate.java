@@ -37,13 +37,10 @@ public class MotorcycleCreate implements Serializable {
     @Getter
     private List<EngineTypeModel> engineTypes;
 
-    private Conversation conversation;
-
     @Inject
-    public MotorcycleCreate(MotorcycleService service, EngineTypeService engineTypeService, Conversation conversation){
+    public MotorcycleCreate(MotorcycleService service, EngineTypeService engineTypeService){
         this.service = service;
         this.engineTypeService = engineTypeService;
-        this.conversation = conversation;
     }
 
     @PostConstruct
@@ -52,22 +49,16 @@ public class MotorcycleCreate implements Serializable {
                 .map(EngineTypeModel.entityToModelMapper())
                 .collect(Collectors.toList());
         motorcycle = MotorcycleCreateModel.builder().build();
-        conversation.begin();
     }
 
     public String cancelAction(){
-        conversation.end();
         return "/engineType/engine_type_view.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
     public String saveAction(){
         service.create(MotorcycleCreateModel.modelToEntityMapper(
                 engineType -> engineTypeService.findByName(engineType).orElseThrow()).apply(motorcycle));
-        conversation.end();
         return "/engineType/engine_type_view.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
-    public String getConversationId(){
-        return this.conversation.getId();
-    }
 }
