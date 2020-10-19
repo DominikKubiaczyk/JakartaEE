@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="engineType" name="css/engine_type_list.css"/>
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header>
+                    <h2>Engine types</h2>
+                </header>
+                <h:dataTable value="#{engineTypesList.engineTypes.engineTypes}" var="engineType" styleClass="">
+                    <h:column>
+                        <f:facet name="header">Producer</f:facet>
+                        <h:outputText value="#{engineType.producer}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Size</f:facet>
+                        <h:outputText value="#{engineType.size}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">View</f:facet>
+                        <h:link outcome="/engineType/engine_type_view.xhtml" value="view">
+                            <f:param name="id" value="#{engineType.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <h:form>
+                            <h:commandButton styleClass="" value="delete" action="#{engineTypesList.deleteEngineType(engineType)}"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
