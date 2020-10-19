@@ -30,7 +30,6 @@ public class EngineTypesList implements Serializable {
     public String deleteEngineType(EngineTypesModel.EngineType engineType){
         service.delete(engineType.getId());
         return "engine_type_list?faces-redirect=true&includeViewParams=true";
-
     }
 
 }

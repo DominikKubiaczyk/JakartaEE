@@ -52,13 +52,13 @@ public class MotorcycleCreate implements Serializable {
     }
 
     public String cancelAction(){
-        return "/engineType/engine_type_view.xhtml?faces-redirect=true&includeViewParams=true";
+        return "/engineType/engine_type_list?faces-redirect=true";
     }
 
     public String saveAction(){
         service.create(MotorcycleCreateModel.modelToEntityMapper(
                 engineType -> engineTypeService.findByName(engineType).orElseThrow()).apply(motorcycle));
-        return "/engineType/engine_type_view.xhtml?faces-redirect=true&includeViewParams=true";
+        return "/engineType/engine_type_list?faces-redirect=true";
     }
 
 }

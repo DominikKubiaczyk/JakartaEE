@@ -36,6 +36,6 @@ public class EngineTypeModelConverter implements Converter<EngineTypeModel> {
         } else {
             System.out.println(engineTypeModel);
         }
-        return engineTypeModel == null ? "" : String.format("%s %f",engineTypeModel.getProducer().toString(), engineTypeModel.getSize());
+        return engineTypeModel == null ? "" : String.format("%s %s",engineTypeModel.getProducer().toString(), Integer.toString(engineTypeModel.getSize()));
     }
 }

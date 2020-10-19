@@ -29,10 +29,11 @@ public class MotorcycleCreateModel {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return model -> Motorcycle.builder()
                 .id(UUID.randomUUID())
-                .engineType(engineTypeFunction.apply(String.format("%s %f",model.getEngineType().getProducer().toString(), model.getEngineType().getSize())))
+                .engineType(engineTypeFunction.apply(String.format("%s %s",model.getEngineType().getProducer().toString(), Integer.toString(model.getEngineType().getSize()))))
                 .color(model.getColor())
                 .weight(model.getWeight())
                 .productionDate(LocalDate.parse(model.getProductionDate(), formatter))
                 .build();
     }
+
 }
