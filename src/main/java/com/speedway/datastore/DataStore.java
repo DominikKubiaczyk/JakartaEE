@@ -124,6 +124,7 @@ public class DataStore {
     }
 
     public synchronized void updateMotorcycle(Motorcycle motorcycle) throws IllegalArgumentException {
+        System.out.println("PPPPPPP " + motorcycle);
         findMotorcycle(motorcycle.getId()).ifPresentOrElse(
                 original -> {
                     motorcycles.remove(original);

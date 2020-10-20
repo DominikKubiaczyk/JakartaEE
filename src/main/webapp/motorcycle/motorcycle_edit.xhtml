@@ -20,7 +20,8 @@
                 <h:form class="motorcycle__form">
                     <h:outputLabel for="engineType" value="Engine type:"/>
                     <h:selectOneMenu id="engineType" value="#{motorcycleEdit.motorycle.engineType}">
-                        <f:selectItems var="engineType" value="#{motorcycleEdit.engineTypes}" itemValue="#{engineType}"
+                        <f:selectItem itemValue="#{motorcycleEdit.motorycle.engineType}" itemLabel="#{motorcycleEdit.motorycle.engineType}"/>
+                        <f:selectItems var="engineType" value="#{motorcycleEdit.engineTypes}" itemValue="#{engineType.producer} #{engineType.size}"
                                        itemLabel="#{engineType.producer} #{engineType.size}" itemLabelEscaped="false"/>
                     </h:selectOneMenu>
                     <h:outputLabel for="color" value="Color:"/>

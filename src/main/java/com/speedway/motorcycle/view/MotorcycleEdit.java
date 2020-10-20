@@ -7,6 +7,7 @@ import com.speedway.motorcycle.model.MotorcycleEditModel;
 import com.speedway.motorcycle.service.MotorcycleService;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -43,9 +44,6 @@ public class MotorcycleEdit implements Serializable {
     }
 
     public void init() {
-        engineTypes = engineTypeService.findAll().stream()
-                .map(EngineTypeModel.entityToModelMapper())
-                .collect(Collectors.toList());
         Optional<Motorcycle> motorcycle = service.find(UUID.fromString(id));
         motorcycle.ifPresentOrElse(
                 motor -> {
@@ -58,13 +56,20 @@ public class MotorcycleEdit implements Serializable {
                         e.printStackTrace();
                     }
                 }
+
         );
+        engineTypes = engineTypeService.findAll().stream()
+                .filter(engineType -> !(engineType.getProducer().toString() + " " + engineType.getSize()).equals(this.motorycle.getEngineType()))
+                .map(EngineTypeModel.entityToModelMapper())
+                .collect(Collectors.toList());
     }
 
     public String saveAction() {
-        service.update(MotorcycleEditModel.modelToEntityMapper(engineType -> engineTypeService.findByName(engineType).orElseThrow())
+        System.out.println("PPPPFFFFF " + motorycle.getEngineType());
+
+        service.update(MotorcycleEditModel.modelToEntityMapper(engineType ->
+            engineTypeService.findByName(engineType).orElseThrow())
                 .apply(service.find(UUID.fromString(id)).orElseThrow(), motorycle));
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true&includeView=true";
+        return "/engineType/engine_type_list.xhtml?faces-redirect=true";
     }
 }
