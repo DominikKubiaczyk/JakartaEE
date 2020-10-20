@@ -39,6 +39,12 @@
                             </h:link>
                         </h:column>
                         <h:column>
+                            <f:facet name="header">View</f:facet>
+                            <h:link outcome="/motorcycle/motorcycle_edit.xhtml" value="edit">
+                                <f:param name="id" value="#{motorcycle.id}"/>
+                            </h:link>
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Delete</f:facet>
                             <h:form>
                                 <h:commandButton styleClass="" value="delete" action="#{motorcycleList.deleteMotorcycle(motorcycle)}"/>

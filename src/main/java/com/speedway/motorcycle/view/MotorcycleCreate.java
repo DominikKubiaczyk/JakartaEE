@@ -29,7 +29,7 @@ public class MotorcycleCreate implements Serializable {
 
     @Setter
     @Getter
-    private UUID id;
+    private String id;
 
     @Getter
     private MotorcycleCreateModel motorcycle;

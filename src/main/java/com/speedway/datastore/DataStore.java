@@ -58,7 +58,6 @@ public class DataStore {
     }
 
     public Optional<EngineType> findEngineTypeByName(String name){
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@" + name);
         return engineTypes.stream()
                 .filter(engineType -> String.format("%s %s",engineType.getProducer().toString(), Integer.toString(engineType.getSize())).equals(name))
                 .findFirst()

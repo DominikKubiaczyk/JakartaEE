@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{motorcycleEdit.id}" required="true"/>
+        <f:viewAction action="#{motorcycleEdit.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="motorcycle" name="css/motorcycle_edit.css"/>
+        <h:panelGroup layout="block">
+            <article class="text--justifed">
+                <header>
+                    <h2>Edit motorcycle</h2>
+                </header>
+                <h:form class="motorcycle__form">
+                    <h:outputLabel for="engineType" value="Engine type:"/>
+                    <h:selectOneMenu id="engineType" value="#{motorcycleEdit.motorycle.engineType}">
+                        <f:selectItems var="engineType" value="#{motorcycleEdit.engineTypes}" itemValue="#{engineType}"
+                                       itemLabel="#{engineType.producer} #{engineType.size}" itemLabelEscaped="false"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel for="color" value="Color:"/>
+                    <h:inputText class="" id="color" value="#{motorcycleEdit.motorycle.color}"/>
+                    <h:outputLabel for="weight" value="Weight:"/>
+                    <h:inputText class="" id="weight" value="#{motorcycleEdit.motorycle.weight}"/>
+                    <h:outputLabel for="productionDate" value="Production date (YYYY-MM-DD):"/>
+                    <h:inputText class="" id="productionDate" value="#{motorcycleEdit.motorycle.productionDate}"/>
+                    <h:commandButton class="" value="Edit" action="#{motorcycleEdit.saveAction}"/>
+                </h:form>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
