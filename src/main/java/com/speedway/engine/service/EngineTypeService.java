@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,14 +34,17 @@ public class EngineTypeService {
         return this.repository.findByName(name);
     }
 
+    @Transactional
     public void create(EngineType engineType){
         this.repository.create(engineType);
     }
 
+    @Transactional
     public void delete(UUID id){
         this.repository.delete(id);
     }
 
+    @Transactional
     public void update(EngineType engineType){
         this.repository.update(engineType);
     }

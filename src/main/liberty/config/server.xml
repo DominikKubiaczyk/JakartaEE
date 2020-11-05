@@ -7,5 +7,20 @@
         <feature>cdi-2.0</feature>
         <feature>jsf-2.3</feature>
         <feature>jaxrs-2.1</feature>
+        <feature>jpa-2.2</feature>
     </featureManager>
+
+    <dataSource id="SpeedwayDataSource" jndiName="jdbc/Speedway">
+        <jdbcDriver javax.sql.XADataSource="org.h2.jdbcx.JdbcDataSource"
+                    javax.sql.ConnectionPoolDataSource="org.h2.jdbcx.JdbcDataSource"
+                    javax.sql.DataSource="org.h2.jdbcx.JdbcDataSource"
+                    libraryRef="H2JDBCLib"/>
+        <properties URL="jdbc:h2:mem:speedway"/>
+    </dataSource>
+
+    <library id="H2JDBCLib">
+        <fileset dir="${wlp.install.dir}/usr/shared/resources" includes="h2-1.4.200.jar"/>
+    </library>
+
+    <logging consoleLogLevel="INFO"/>
 </server>

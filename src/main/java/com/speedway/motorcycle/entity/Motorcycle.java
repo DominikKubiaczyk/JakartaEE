@@ -4,21 +4,31 @@ import com.speedway.engine.entity.EngineType;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Builder
+@Entity
 public class Motorcycle implements Serializable {
-    private UUID id;
-    private EngineType engineType;
+
+    @Id
+    @Builder.Default
+    private UUID id = UUID.randomUUID();
+
     private String color;
+
     private float weight;
+
     private LocalDate productionDate;
+
+    @ManyToOne
+    private EngineType engineType;
 }

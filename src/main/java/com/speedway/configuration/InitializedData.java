@@ -11,6 +11,7 @@ import com.speedway.rider.service.RiderService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
+import javax.enterprise.context.control.RequestContextController;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -21,12 +22,14 @@ public class InitializedData {
     private final RiderService riderService;
     private final MotorcycleService motorcycleService;
     private final EngineTypeService engineTypeService;
+    private final RequestContextController requestContextController;
 
     @Inject
-    public InitializedData(RiderService riderService, MotorcycleService motorcycleService, EngineTypeService engineTypeService){
+    public InitializedData(RiderService riderService, MotorcycleService motorcycleService, EngineTypeService engineTypeService, RequestContextController requestContextController){
         this.riderService = riderService;
         this.engineTypeService = engineTypeService;
         this.motorcycleService = motorcycleService;
+        this.requestContextController = requestContextController;
     }
 
     public void contextInitialized(@Observes @Initialized(ApplicationScoped.class) Object init){
@@ -34,6 +37,7 @@ public class InitializedData {
     }
 
     private synchronized void init() {
+        requestContextController.activate();
         Rider rider1 = Rider.builder()
                 .id(UUID.randomUUID())
                 .firstName("Emil")
