@@ -2,11 +2,9 @@ package com.speedway.motorcycle.model;
 
 import com.speedway.engine.entity.EngineType;
 import com.speedway.motorcycle.entity.Motorcycle;
-import com.speedway.rider.entity.Rider;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 import java.util.function.Function;
 
 @Getter

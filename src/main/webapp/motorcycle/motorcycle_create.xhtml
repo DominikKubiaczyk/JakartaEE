@@ -6,9 +6,9 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-        <h:outputStylesheet library="motorcycle" name="css/motorcycle_create.css"/>
+        <h:outputStylesheet library="motorcycle" name="css/motorcycle.css"/>
         <h:panelGroup layout="block">
-            <article class="text--justified">
+            <article class="text__centered">
                 <header>
                     <h2>Adding new motorcycle</h2>
                 </header>
@@ -19,13 +19,13 @@
                                        itemLabel="#{engineType.producer} #{engineType.size}" itemLabelEscaped="false"/>
                     </h:selectOneMenu>
                     <h:outputLabel for="color" value="Color:"/>
-                    <h:inputText class="" id="color" value="#{motorcycleCreate.motorcycle.color}"/>
+                    <h:inputText id="color" value="#{motorcycleCreate.motorcycle.color}"/>
                     <h:outputLabel for="weight" value="Weight:"/>
-                    <h:inputText class="" id="weight" value="#{motorcycleCreate.motorcycle.weight}"/>
+                    <h:inputText id="weight" value="#{motorcycleCreate.motorcycle.weight}"/>
                     <h:outputLabel for="productionDate" value="Production date (YYYY-MM-DD):"/>
-                    <h:inputText class="" id="productionDate" value="#{motorcycleCreate.motorcycle.productionDate}"/>
-                    <h:commandButton class="" value="Cancel" immediate="true" action="#{motorcycleCreate.cancelAction()}"/>
-                    <h:commandButton class="" value="Save" action="#{motorcycleCreate.saveAction()}"/>
+                    <h:inputText id="productionDate" value="#{motorcycleCreate.motorcycle.productionDate}"/>
+                    <h:commandButton value="Cancel" immediate="true" action="#{motorcycleCreate.cancelAction()}"/>
+                    <h:commandButton value="Save" action="#{motorcycleCreate.saveAction()}"/>
                 </h:form>
             </article>
         </h:panelGroup>

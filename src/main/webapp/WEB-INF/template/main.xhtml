@@ -12,15 +12,18 @@
         <meta name="keywords" content="Speedway"/>
         <meta name="author" content="Dominik Kubiaczyk"/>
         <title>Speedway App</title>
-
         <h:outputStylesheet library="default" name="css/styles.css"/>
     </h:head>
     <h:body>
         <div class="container">
-            <header class="header">
-                <h:graphicImage library="images" name="headerPhoto.jpg" />
-                <h1>Speedway App</h1>
-                <h2>App to manage your speedway motorcycles</h2>
+            <header>
+                <div class="header__top">
+                    <h:graphicImage library="images" name="headerPhoto.jpg" class="headerImage"/>
+                    <h1 class="headers title">Speedway App</h1>
+                </div>
+                <div class="header__bottom">
+                    <h2 class="headers">App to manage your speedway motorcycles</h2>
+                </div>
             </header>
 
             <nav class="navigation-bar">

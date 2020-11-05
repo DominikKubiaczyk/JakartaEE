@@ -1,7 +1,6 @@
 package com.speedway.motorcycle.model;
 
 import com.speedway.engine.entity.EngineType;
-import com.speedway.engine.model.EngineTypeModel;
 import com.speedway.motorcycle.entity.Motorcycle;
 import lombok.*;
 

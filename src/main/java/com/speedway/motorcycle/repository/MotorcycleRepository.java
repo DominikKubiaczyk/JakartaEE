@@ -1,7 +1,6 @@
 package com.speedway.motorcycle.repository;
 
 import com.speedway.datastore.DataStore;
-import com.speedway.engine.entity.EngineType;
 import com.speedway.motorcycle.entity.Motorcycle;
 import com.speedway.repository.Repository;
 
@@ -38,7 +37,6 @@ public class MotorcycleRepository implements Repository<Motorcycle, UUID> {
 
     @Override
     public void delete(UUID id) {
-        System.out.println("DeleteRepository");
         this.store.deleteMotorcycle(id);
     }
 

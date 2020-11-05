@@ -1,6 +1,5 @@
 package com.speedway.engine.view;
 
-import com.speedway.engine.entity.EngineType;
 import com.speedway.engine.model.EngineTypesModel;
 import com.speedway.engine.service.EngineTypeService;
 

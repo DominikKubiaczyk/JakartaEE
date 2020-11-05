@@ -1,6 +1,5 @@
 package com.speedway.motorcycle.view;
 
-import com.speedway.engine.entity.EngineType;
 import com.speedway.engine.model.EngineTypeModel;
 import com.speedway.engine.service.EngineTypeService;
 import com.speedway.motorcycle.model.MotorcycleCreateModel;
@@ -10,14 +9,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -56,6 +52,9 @@ public class MotorcycleCreate implements Serializable {
     }
 
     public String saveAction(){
+        if(!motorcycle.getProductionDate().matches("[0-9]{4}-[0-9]{2}-[0-9]{2}") || motorcycle.getColor() == ""){
+            return null;
+        }
         service.create(MotorcycleCreateModel.modelToEntityMapper(
                 engineType -> engineTypeService.findByName(engineType).orElseThrow()).apply(motorcycle));
         return "/engineType/engine_type_list?faces-redirect=true";

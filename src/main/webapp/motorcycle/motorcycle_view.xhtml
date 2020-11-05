@@ -6,14 +6,13 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <f:metadata>
-        <f:viewParam name="id" value="#{motorcycleView.id}" required="true"/>
+        <f:viewParam name="id" value="#{motorcycleView.id}" required="false"/>
         <f:viewAction action="#{motorcycleView.init()}"/>
     </f:metadata>
 
     <ui:define name="content">
-        <h:outputStylesheet library="motorcycle" name="css/motorcycle_view.css"/>
         <h:panelGroup layout="block">
-            <article class="text--justified">
+            <article class="text__centered">
                 <header>
                     <h2>
                         <h:outputText value="#{motorcycleView.motorcycle.engineType.producer} "/>
@@ -22,10 +21,12 @@
                     </h2>
                 </header>
                 <div>
-                    Weight <h:outputText value="#{motorcycleView.motorcycle.weight}"/>
+                    <span class="text--bold">
+                        Weight: </span> <h:outputText value="#{motorcycleView.motorcycle.weight}"/>
                 </div>
                 <div>
-                    Production date <h:outputText value="#{motorcycleView.motorcycle.productionDate.dayOfMonth}-#{motorcycleView.motorcycle.productionDate.monthValue}-#{motorcycleView.motorcycle.productionDate.year}"/>
+                    <span class="text--bold">
+                        Production date: </span> <h:outputText value="#{motorcycleView.motorcycle.productionDate.dayOfMonth}-#{motorcycleView.motorcycle.productionDate.monthValue}-#{motorcycleView.motorcycle.productionDate.year}"/>
                 </div>
             </article>
         </h:panelGroup>

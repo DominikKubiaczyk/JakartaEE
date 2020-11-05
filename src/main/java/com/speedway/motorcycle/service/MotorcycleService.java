@@ -1,6 +1,5 @@
 package com.speedway.motorcycle.service;
 
-import com.speedway.engine.entity.EngineType;
 import com.speedway.motorcycle.entity.Motorcycle;
 import com.speedway.motorcycle.repository.MotorcycleRepository;
 import lombok.NoArgsConstructor;
@@ -35,7 +34,6 @@ public class MotorcycleService {
     }
 
     public void delete(UUID id){
-        System.out.println("DeleteService");
         this.repository.delete(this.repository.find(id).orElseThrow().getId());
     }
 

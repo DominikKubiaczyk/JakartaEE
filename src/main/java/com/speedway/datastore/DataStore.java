@@ -4,11 +4,12 @@ import com.speedway.engine.entity.EngineType;
 import com.speedway.motorcycle.entity.Motorcycle;
 import com.speedway.rider.entity.Rider;
 import com.speedway.serialization.CloningUtility;
+
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.lang.invoke.StringConcatException;
 import java.util.*;
+
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -59,7 +60,7 @@ public class DataStore {
 
     public Optional<EngineType> findEngineTypeByName(String name){
         return engineTypes.stream()
-                .filter(engineType -> String.format("%s %s",engineType.getProducer().toString(), Integer.toString(engineType.getSize())).equals(name))
+                .filter(engineType -> String.format("%s %s",engineType.getProducer().toString(), engineType.getSize()).equals(name))
                 .findFirst()
                 .map(CloningUtility::clone);
     }
@@ -68,7 +69,7 @@ public class DataStore {
         findRider(rider.getId()).ifPresentOrElse(
                 original -> {
                     throw new IllegalArgumentException(
-                            String.format("Rider juz istnieje"));
+                            String.format("Rider already exists"));
                 },
                 () -> riders.add(rider));
     }
@@ -103,7 +104,7 @@ public class DataStore {
                 },
                 () -> {
                     throw new IllegalArgumentException(
-                            String.format("Nie można zaktualizować nieistniejącego ridera!")
+                            String.format("Cannot update not existing rider!")
                     );
                 }
         );
@@ -124,7 +125,6 @@ public class DataStore {
     }
 
     public synchronized void updateMotorcycle(Motorcycle motorcycle) throws IllegalArgumentException {
-        System.out.println("PPPPPPP " + motorcycle);
         findMotorcycle(motorcycle.getId()).ifPresentOrElse(
                 original -> {
                     motorcycles.remove(original);
@@ -155,7 +155,6 @@ public class DataStore {
     }
 
     public synchronized void deleteMotorcycle(UUID id) throws IllegalArgumentException{
-        System.out.println("DeleteStore");
         findMotorcycle(id).ifPresentOrElse(
                 original -> motorcycles.remove(original),
                 () -> {

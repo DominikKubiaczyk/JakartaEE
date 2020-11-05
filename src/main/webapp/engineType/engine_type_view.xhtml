@@ -6,14 +6,13 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <f:metadata>
-        <f:viewParam name="id" value="#{engineTypeView.id}" required="true"/>
+        <f:viewParam name="id" value="#{engineTypeView.id}" required="false"/>
         <f:viewAction action="#{engineTypeView.init()}"/>
     </f:metadata>
 
     <ui:define name="content">
-        <h:outputStylesheet library="engineType" name="css/engine_type_view.css"/>
         <h:panelGroup layout="block">
-            <article class="text--justified">
+            <article class="text__centered">
                 <header>
                     <h2>
                         <h:outputText value="#{engineTypeView.engineType.producer} "/>
@@ -21,13 +20,15 @@
                     </h2>
                 </header>
                 <div>
-                    Max speed <h:outputText value="#{engineTypeView.engineType.maxSpeed}"/>
+                    <span class="text--bold">
+                        Max speed: </span> <h:outputText value="#{engineTypeView.engineType.maxSpeed}"/>
                 </div>
                 <div>
-                    Tuner <h:outputText value="#{engineTypeView.engineType.tuner}"/>
+                    <span class="text--bold">
+                        Tuner: </span> <h:outputText value="#{engineTypeView.engineType.tuner}"/>
                 </div>
                 <div>
-                    <h:dataTable rendered="#{motorcycleList.getMotorcycles(engineTypeView.id).motorcycles.size() > 0}" value="#{motorcycleList.getMotorcycles(engineTypeView.id).motorcycles}" var="motorcycle" styleClass="">
+                    <h:dataTable rendered="#{motorcycleList.getMotorcycles(engineTypeView.id).motorcycles.size() > 0}" value="#{motorcycleList.getMotorcycles(engineTypeView.id).motorcycles}" var="motorcycle">
                         <h:column>
                             <f:facet name="header">Color</f:facet>
                             <h:outputText value="#{motorcycle.color}"/>
@@ -47,7 +48,7 @@
                         <h:column>
                             <f:facet name="header">Delete</f:facet>
                             <h:form>
-                                <h:commandButton styleClass="" value="delete" action="#{motorcycleList.deleteMotorcycle(motorcycle)}"/>
+                                <h:commandButton value="delete" action="#{motorcycleList.deleteMotorcycle(motorcycle)}"/>
                             </h:form>
                         </h:column>
                     </h:dataTable>

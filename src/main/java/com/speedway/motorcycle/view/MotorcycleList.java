@@ -1,13 +1,9 @@
 package com.speedway.motorcycle.view;
 
-import com.speedway.engine.model.EngineTypesModel;
-import com.speedway.engine.view.EngineTypeView;
 import com.speedway.motorcycle.model.MotorcyclesModel;
 import com.speedway.motorcycle.service.MotorcycleService;
 
-import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -30,8 +26,6 @@ public class MotorcycleList implements Serializable {
         }
         return motorcycles;
     }
-
-
 
     public String deleteMotorcycle(MotorcyclesModel.Motorcycle motorcycle){
         service.delete(motorcycle.getId());

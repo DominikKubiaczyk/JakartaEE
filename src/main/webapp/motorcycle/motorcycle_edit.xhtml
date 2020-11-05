@@ -6,31 +6,31 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <f:metadata>
-        <f:viewParam name="id" value="#{motorcycleEdit.id}" required="true"/>
+        <f:viewParam name="id" value="#{motorcycleEdit.id}" required="false"/>
         <f:viewAction action="#{motorcycleEdit.init()}"/>
     </f:metadata>
 
     <ui:define name="content">
-        <h:outputStylesheet library="motorcycle" name="css/motorcycle_edit.css"/>
+        <h:outputStylesheet library="motorcycle" name="css/motorcycle.css"/>
         <h:panelGroup layout="block">
-            <article class="text--justifed">
+            <article class="text__centered">
                 <header>
                     <h2>Edit motorcycle</h2>
                 </header>
                 <h:form class="motorcycle__form">
                     <h:outputLabel for="engineType" value="Engine type:"/>
-                    <h:selectOneMenu id="engineType" value="#{motorcycleEdit.motorycle.engineType}">
-                        <f:selectItem itemValue="#{motorcycleEdit.motorycle.engineType}" itemLabel="#{motorcycleEdit.motorycle.engineType}"/>
+                    <h:selectOneMenu id="engineType" value="#{motorcycleEdit.motorcycle.engineType}">
+                        <f:selectItem itemValue="#{motorcycleEdit.motorcycle.engineType}" itemLabel="#{motorcycleEdit.motorcycle.engineType}"/>
                         <f:selectItems var="engineType" value="#{motorcycleEdit.engineTypes}" itemValue="#{engineType.producer} #{engineType.size}"
                                        itemLabel="#{engineType.producer} #{engineType.size}" itemLabelEscaped="false"/>
                     </h:selectOneMenu>
                     <h:outputLabel for="color" value="Color:"/>
-                    <h:inputText class="" id="color" value="#{motorcycleEdit.motorycle.color}"/>
+                    <h:inputText id="color" value="#{motorcycleEdit.motorcycle.color}"/>
                     <h:outputLabel for="weight" value="Weight:"/>
-                    <h:inputText class="" id="weight" value="#{motorcycleEdit.motorycle.weight}"/>
+                    <h:inputText id="weight" value="#{motorcycleEdit.motorcycle.weight}"/>
                     <h:outputLabel for="productionDate" value="Production date (YYYY-MM-DD):"/>
-                    <h:inputText class="" id="productionDate" value="#{motorcycleEdit.motorycle.productionDate}"/>
-                    <h:commandButton class="" value="Edit" action="#{motorcycleEdit.saveAction}"/>
+                    <h:inputText id="productionDate" value="#{motorcycleEdit.motorcycle.productionDate}"/>
+                    <h:commandButton value="Edit" action="#{motorcycleEdit.saveAction}"/>
                 </h:form>
             </article>
         </h:panelGroup>

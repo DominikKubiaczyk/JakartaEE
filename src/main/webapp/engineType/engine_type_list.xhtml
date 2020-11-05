@@ -6,13 +6,12 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-        <h:outputStylesheet library="engineType" name="css/engine_type_list.css"/>
         <h:panelGroup layout="block">
-            <article class="text--justified">
+            <article class="text__centered">
                 <header>
                     <h2>Engine types</h2>
                 </header>
-                <h:dataTable value="#{engineTypesList.engineTypes.engineTypes}" var="engineType" styleClass="">
+                <h:dataTable value="#{engineTypesList.engineTypes.engineTypes}" var="engineType">
                     <h:column>
                         <f:facet name="header">Producer</f:facet>
                         <h:outputText value="#{engineType.producer}"/>
@@ -30,7 +29,7 @@
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
                         <h:form>
-                            <h:commandButton styleClass="" value="delete" action="#{engineTypesList.deleteEngineType(engineType)}"/>
+                            <h:commandButton value="delete" action="#{engineTypesList.deleteEngineType(engineType)}"/>
                         </h:form>
                     </h:column>
                 </h:dataTable>

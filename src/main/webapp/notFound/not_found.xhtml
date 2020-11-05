@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="motorcycle" name="css/motorcycle.css"/>
+        <h:panelGroup layout="block">
+            <article class="text__centered">
+                <header>
+                    <h2>Page not found. The url is incorrect or the searched item does not exist.</h2>
+                </header>
+                <div>
+                    <h:graphicImage library="images" name="notFound.png" class="notFoundImage"/>
+                </div>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

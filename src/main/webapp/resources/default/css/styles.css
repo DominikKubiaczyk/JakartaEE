@@ -1,0 +1,138 @@
+body{
+    background-color: #888888;
+}
+
+.container {
+    margin: 50px auto;
+    width: 75%;
+}
+
+.headerImage{
+    height: 100px;
+    width: 15%;
+    float: left;
+    border-radius: 50%;
+}
+
+.header__top{
+    width: 100%;
+    background-color: #111111;
+    color: white;
+    font-weight: bold;
+    height: 100px;
+    text-align: center;
+    align-items: center;
+}
+
+.header__bottom{
+    width: 100%;
+    background-color: #222222;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.headers{
+    margin: 0;
+    height: 100%;
+    line-height: 100%;
+    padding: 2% 0;
+}
+
+.title{
+    font-size: xxx-large;
+}
+
+
+.navigation-bar {
+    background-color: #444444;
+}
+
+.navigation-bar ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-bar li {
+    display: inline-block;
+}
+
+.navigation-bar a {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #dddddd;
+    font-weight: bold;
+}
+
+.navigation-bar a:hover {
+    background-color: #666666;
+    color: #ffffff;
+}
+
+.main-section {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    min-height: 20vw;
+    text-align: center;
+}
+
+.footer {
+    font-size: small;
+    text-align: center;
+    color: white;
+    background-color: #000000;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.text--bold {
+    font-weight: bold;
+}
+
+.text__centered{
+    text-align: center;
+    display: inline-block;
+}
+
+.ui-control {
+    border-color: #214753;
+    background-color: #E0EEF7;
+    border-width: 1px;
+    padding: 1px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+}
+
+.ui-control:focus {
+    outline: none;
+}
+
+.ui-button {
+    height: 24px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.ui-input {
+    height: 20px;
+}
+
+table{
+    border: 3px black solid;
+}
+
+td{
+    border-bottom: 2px black solid;
+}
+
+th{
+    border-bottom: 2px black solid;
+}
+

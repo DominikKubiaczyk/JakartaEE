@@ -33,19 +33,26 @@ public class MotorcycleView implements Serializable {
         this.service = service;
     }
 
-    public void init(){
-        Optional<Motorcycle> motorcycle = service.find(UUID.fromString(id));
-        motorcycle.ifPresentOrElse(
-                motor -> {
-                    this.motorcycle = MotorcycleModel.entityToModelMapper().apply(motor);
-                },
-                () -> {
-                    try {
-                        FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Motorcycle not found");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+    public void init() throws IOException {
+        if(id == null || !id.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")){
+            FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND,
+                                                                                                    "Invalid id");
+        } else {
+            Optional<Motorcycle> motorcycle = service.find(UUID.fromString(id));
+            motorcycle.ifPresentOrElse(
+                    motor -> {
+                        this.motorcycle = MotorcycleModel.entityToModelMapper().apply(motor);
+                    },
+                    () -> {
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext()
+                                    .responseSendError(HttpServletResponse.SC_NOT_FOUND, "Motorcycle not found");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-        );
+            );
+        }
     }
 }

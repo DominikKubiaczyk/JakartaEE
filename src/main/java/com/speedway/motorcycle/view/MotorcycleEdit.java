@@ -7,7 +7,6 @@ import com.speedway.motorcycle.model.MotorcycleEditModel;
 import com.speedway.motorcycle.service.MotorcycleService;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -32,7 +31,7 @@ public class MotorcycleEdit implements Serializable {
     private String id;
 
     @Getter
-    private MotorcycleEditModel motorycle;
+    private MotorcycleEditModel motorcycle;
 
     @Getter
     private List<EngineTypeModel> engineTypes;
@@ -43,33 +42,43 @@ public class MotorcycleEdit implements Serializable {
         this.engineTypeService = engineTypeService;
     }
 
-    public void init() {
-        Optional<Motorcycle> motorcycle = service.find(UUID.fromString(id));
-        motorcycle.ifPresentOrElse(
-                motor -> {
-                    this.motorycle = MotorcycleEditModel.entityToModelMapper(engineType -> String.format("%s %s",engineType.getProducer().toString(), Integer.toString(engineType.getSize()))).apply(motor);
-                },
-                () -> {
-                    try {
-                        FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Motorcycle not found");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+    public void init() throws IOException {
+        if(id == null || !id.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")){
+            FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND,
+                                                                                "Invalid id");
+        } else {
+            Optional<Motorcycle> motorcycle = service.find(UUID.fromString(id));
+            motorcycle.ifPresentOrElse(
+                    motor -> {
+                        this.motorcycle = MotorcycleEditModel.entityToModelMapper(engineType ->
+                                String.format("%s %s",engineType.getProducer().toString(), engineType.getSize())).apply(motor);
+                    },
+                    () -> {
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext()
+                                    .responseSendError(HttpServletResponse.SC_NOT_FOUND, "Motorcycle not found");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-        );
-        engineTypes = engineTypeService.findAll().stream()
-                .filter(engineType -> !(engineType.getProducer().toString() + " " + engineType.getSize()).equals(this.motorycle.getEngineType()))
-                .map(EngineTypeModel.entityToModelMapper())
-                .collect(Collectors.toList());
+            );
+            engineTypes = engineTypeService.findAll().stream()
+                    .filter(engineType -> !(engineType.getProducer().toString() + " " + engineType.getSize())
+                                                                            .equals(this.motorcycle.getEngineType()))
+                    .map(EngineTypeModel.entityToModelMapper())
+                    .collect(Collectors.toList());
+        }
+
     }
 
     public String saveAction() {
-        System.out.println("PPPPFFFFF " + motorycle.getEngineType());
-
+        if(!motorcycle.getProductionDate().matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")){
+            return "/motorcycle/motorcycle_edit.xhtml?faces-redirect=true&includeViewParams=true";
+        }
         service.update(MotorcycleEditModel.modelToEntityMapper(engineType ->
             engineTypeService.findByName(engineType).orElseThrow())
-                .apply(service.find(UUID.fromString(id)).orElseThrow(), motorycle));
+                .apply(service.find(UUID.fromString(id)).orElseThrow(), motorcycle));
         return "/engineType/engine_type_list.xhtml?faces-redirect=true";
     }
 }

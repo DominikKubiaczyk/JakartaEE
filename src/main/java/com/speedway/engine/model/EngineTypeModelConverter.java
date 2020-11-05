@@ -31,11 +31,6 @@ public class EngineTypeModelConverter implements Converter<EngineTypeModel> {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, EngineTypeModel engineTypeModel) {
-        if(engineTypeModel == null){
-            System.out.println("");
-        } else {
-            System.out.println(engineTypeModel);
-        }
-        return engineTypeModel == null ? "" : String.format("%s %s",engineTypeModel.getProducer().toString(), Integer.toString(engineTypeModel.getSize()));
+        return engineTypeModel == null ? "" : engineTypeModel.getProducer().toString() + " " + engineTypeModel.getSize();
     }
 }

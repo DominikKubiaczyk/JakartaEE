@@ -1,7 +1,7 @@
 package com.speedway.motorcycle.entity;
 
 import com.speedway.engine.entity.EngineType;
-import com.speedway.rider.entity.Rider;
+
 import lombok.*;
 
 import java.io.Serializable;

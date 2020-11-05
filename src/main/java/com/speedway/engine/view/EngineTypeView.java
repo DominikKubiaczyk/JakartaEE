@@ -3,15 +3,10 @@ package com.speedway.engine.view;
 import com.speedway.engine.entity.EngineType;
 import com.speedway.engine.model.EngineTypeModel;
 import com.speedway.engine.service.EngineTypeService;
-import com.speedway.motorcycle.entity.Motorcycle;
-import com.speedway.motorcycle.service.MotorcycleService;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -39,19 +34,25 @@ public class EngineTypeView implements Serializable {
         this.service = service;
     }
 
-    public void init(){
-        Optional<EngineType> engineType = service.find(UUID.fromString(id));
-        engineType.ifPresentOrElse(
-                engineT -> {
-                    this.engineType = EngineTypeModel.entityToModelMapper().apply(engineT);
-                },
-                () -> {
-                    try {
-                        FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Engine type not found");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+    public void init() throws IOException {
+        if(id == null || !id.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")){
+            FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND,
+                                                                                                        "Invalid id");
+        } else {
+            Optional<EngineType> engineType = service.find(UUID.fromString(id));
+            engineType.ifPresentOrElse(
+                    engineT -> {
+                        this.engineType = EngineTypeModel.entityToModelMapper().apply(engineT);
+                    },
+                    () -> {
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext()
+                                        .responseSendError(HttpServletResponse.SC_NOT_FOUND, "Engine type not found");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-        );
+            );
+        }
     }
 }
