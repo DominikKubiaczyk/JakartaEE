@@ -31,6 +31,8 @@ public class EngineType implements Serializable {
 
     private float maxSpeed;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "engineType", cascade = CascadeType.REMOVE)
     private List<Motorcycle> motorcycles;
 }
