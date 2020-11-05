@@ -31,10 +31,11 @@ public class MotorcycleController {
         this.service = service;
         this.engineTypeService = engineTypeService;
     }
-
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMotorcycles(@PathParam("engineId") UUID engineId) {
+        System.out.println("DUPA:" + engineId);
         if (checkIfEngineTypeIsPresent(engineId)) {
             List<Motorcycle> motorcycles = service.findMotorcycleByEngine(engineId);
             return Response.ok(GetMotorcyclesResponse.entityToDtoMapper().apply(motorcycles)).build();

@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 import java.util.function.Function;
 
 @Getter
@@ -28,7 +27,6 @@ public class MotorcycleCreateModel {
     ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return model -> Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .engineType(engineTypeFunction.apply(String.format("%s %s",model.getEngineType().getProducer().toString(),
                                                                     model.getEngineType().getSize())))
                 .color(model.getColor())

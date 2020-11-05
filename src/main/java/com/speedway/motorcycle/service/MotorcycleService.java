@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,14 +30,17 @@ public class MotorcycleService {
         return this.repository.find(id);
     }
 
+    @Transactional
     public void create(Motorcycle motorcycle){
         this.repository.create(motorcycle);
     }
 
+    @Transactional
     public void delete(UUID id){
         this.repository.delete(this.repository.find(id).orElseThrow().getId());
     }
 
+    @Transactional
     public void update(Motorcycle motorcycle){
         this.repository.update(motorcycle);
     }

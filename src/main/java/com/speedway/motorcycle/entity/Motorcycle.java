@@ -17,6 +17,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Builder
 @Entity
+@Table(name = "motorcycles")
 public class Motorcycle implements Serializable {
 
     @Id
@@ -30,5 +31,6 @@ public class Motorcycle implements Serializable {
     private LocalDate productionDate;
 
     @ManyToOne
+    @JoinColumn(name = "engineType")
     private EngineType engineType;
 }

@@ -80,7 +80,6 @@ public class InitializedData {
         riderService.create(rider4);
 
         EngineType engineType1 = EngineType.builder()
-                .id(UUID.randomUUID())
                 .maxSpeed(110)
                 .producer(EngineProducers.GM)
                 .size(400)
@@ -88,7 +87,6 @@ public class InitializedData {
                 .build();
 
         EngineType engineType2 = EngineType.builder()
-                .id(UUID.randomUUID())
                 .maxSpeed(115)
                 .producer(EngineProducers.GTR)
                 .size(500)
@@ -96,7 +94,6 @@ public class InitializedData {
                 .build();
 
         EngineType engineType3 = EngineType.builder()
-                .id(UUID.randomUUID())
                 .maxSpeed(111)
                 .producer(EngineProducers.JAWA)
                 .size(500)
@@ -104,7 +101,6 @@ public class InitializedData {
                 .build();
 
         EngineType engineType4 = EngineType.builder()
-                .id(UUID.randomUUID())
                 .maxSpeed(110)
                 .producer(EngineProducers.GM)
                 .size(500)
@@ -117,7 +113,6 @@ public class InitializedData {
         engineTypeService.create(engineType4);
 
         Motorcycle motorcycle1 = Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .color("Red")
                 .engineType(engineType1)
                 .productionDate(LocalDate.of(2020,03,01))
@@ -125,7 +120,6 @@ public class InitializedData {
                 .build();
 
         Motorcycle motorcycle2 = Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .color("Blue")
                 .engineType(engineType1)
                 .productionDate(LocalDate.of(2020,03,01))
@@ -133,7 +127,6 @@ public class InitializedData {
                 .build();
 
         Motorcycle motorcycle3 = Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .color("White-green")
                 .engineType(engineType3)
                 .productionDate(LocalDate.of(2020,03,01))
@@ -141,7 +134,6 @@ public class InitializedData {
                 .build();
 
         Motorcycle motorcycle4 = Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .color("Yellow")
                 .engineType(engineType4)
                 .productionDate(LocalDate.of(2020,03,01))
