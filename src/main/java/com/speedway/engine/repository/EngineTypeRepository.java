@@ -61,4 +61,9 @@ public class EngineTypeRepository implements Repository<EngineType, UUID> {
     public void update(EngineType entity) {
         entityManager.merge(entity);
     }
+
+    @Override
+    public void detach(EngineType entity) {
+        entityManager.detach(entity);
+    }
 }

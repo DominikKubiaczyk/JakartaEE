@@ -49,6 +49,11 @@ public class MotorcycleRepository implements Repository<Motorcycle, UUID> {
         entityManager.merge(entity);
     }
 
+    @Override
+    public void detach(Motorcycle entity) {
+        entityManager.detach(entity);
+    }
+
     public List<Motorcycle> findMotorcycleByEngine(UUID id){
         try{
             return entityManager.createQuery("select m from Motorcycle m where m.engineType.id = :id", Motorcycle.class)

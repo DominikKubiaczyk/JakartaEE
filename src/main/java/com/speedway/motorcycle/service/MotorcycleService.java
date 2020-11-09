@@ -1,5 +1,6 @@
 package com.speedway.motorcycle.service;
 
+import com.speedway.engine.repository.EngineTypeRepository;
 import com.speedway.motorcycle.entity.Motorcycle;
 import com.speedway.motorcycle.repository.MotorcycleRepository;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,12 @@ import java.util.UUID;
 public class MotorcycleService {
 
     private MotorcycleRepository repository;
+    private EngineTypeRepository engineTypeRepository;
 
     @Inject
-    public MotorcycleService(MotorcycleRepository repository){
+    public MotorcycleService(MotorcycleRepository repository, EngineTypeRepository engineTypeRepository){
         this.repository = repository;
+        this.engineTypeRepository = engineTypeRepository;
     }
 
     public List<Motorcycle> findAll(){
@@ -32,20 +35,44 @@ public class MotorcycleService {
 
     @Transactional
     public void create(Motorcycle motorcycle){
-        this.repository.create(motorcycle);
+        engineTypeRepository.find(motorcycle.getEngineType().getId()).ifPresent(
+                engineType -> {
+                    engineType.getMotorcycles().add(motorcycle);
+                    repository.create(motorcycle);
+                }
+        );
     }
 
     @Transactional
     public void delete(UUID id){
-        this.repository.delete(this.repository.find(id).orElseThrow().getId());
+        Motorcycle motorcycle = repository.find(id).orElseThrow();
+        motorcycle.getEngineType().getMotorcycles().remove(motorcycle);
+        this.repository.delete(motorcycle.getId());
     }
 
     @Transactional
     public void update(Motorcycle motorcycle){
+        Motorcycle originalMotorcycle = repository.find(motorcycle.getId()).orElseThrow();
+        repository.detach(originalMotorcycle);
+        if(checkIfEngineTypeChanged(originalMotorcycle, motorcycle)){
+           originalMotorcycle.getEngineType().getMotorcycles().removeIf(
+                   motorcycleToRemove -> motorcycleToRemove.getId().equals(motorcycle.getId())
+           );
+           engineTypeRepository.find(motorcycle.getEngineType().getId()).ifPresent(
+                   engineType -> engineType.getMotorcycles().add(motorcycle)
+           );
+        }
         this.repository.update(motorcycle);
     }
 
     public List<Motorcycle> findMotorcycleByEngine(UUID id){
         return this.repository.findMotorcycleByEngine(id);
+    }
+
+    public boolean checkIfEngineTypeChanged(Motorcycle original, Motorcycle updated){
+        if(original.getEngineType().getId().equals(updated.getEngineType().getId())){
+            return false;
+        }
+        return true;
     }
 }

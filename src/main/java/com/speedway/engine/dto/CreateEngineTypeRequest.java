@@ -22,6 +22,7 @@ public class CreateEngineTypeRequest {
 
     public static Function<CreateEngineTypeRequest, EngineType> dtoToEntityMapper(){
         return request -> EngineType.builder()
+                .id(UUID.randomUUID())
                 .maxSpeed(request.getMaxSpeed())
                 .producer(request.getProducer())
                 .size(request.getSize())

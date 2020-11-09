@@ -14,4 +14,6 @@ public interface Repository<E,K> {
     void delete(K id);
 
     void update(E entity);
+
+    void detach(E entity);
 }

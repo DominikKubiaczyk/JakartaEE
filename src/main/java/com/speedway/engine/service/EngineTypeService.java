@@ -46,6 +46,8 @@ public class EngineTypeService {
 
     @Transactional
     public void update(EngineType engineType){
+        EngineType originalEngineType = repository.find(engineType.getId()).orElseThrow();
+        this.repository.detach(originalEngineType);
         this.repository.update(engineType);
     }
 
