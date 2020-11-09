@@ -44,4 +44,9 @@ public class RiderRepository implements Repository<Rider, UUID> {
     public void update(Rider entity) {
         this.store.updateRider(entity);
     }
+
+    @Override
+    public void detach(Rider entity) {
+        throw new UnsupportedOperationException("Not implemented!");
+    }
 }
