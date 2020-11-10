@@ -144,6 +144,7 @@ public class InitializedData {
         motorcycleService.create(motorcycle2);
         motorcycleService.create(motorcycle3);
         motorcycleService.create(motorcycle4);
-    }
 
+        requestContextController.deactivate();
+    }
 }

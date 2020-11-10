@@ -18,6 +18,16 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "motorcycles")
+@NamedQueries({
+        @NamedQuery(
+                name = "Motorcycle.findAll",
+                query = "select m from Motorcycle m"
+        ),
+        @NamedQuery(
+                name = "Motorcycle.findMotorcycleByEngine",
+                query = "select m from Motorcycle m where m.engineType.id = :id"
+        )
+})
 public class Motorcycle implements Serializable {
 
     @Id

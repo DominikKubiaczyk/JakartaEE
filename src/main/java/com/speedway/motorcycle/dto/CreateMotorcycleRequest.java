@@ -26,7 +26,6 @@ public class CreateMotorcycleRequest {
     ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return request -> Motorcycle.builder()
-                .id(UUID.randomUUID())
                 .productionDate(LocalDate.parse(request.getProductionDate(), formatter))
                 .weight(request.getWeight())
                 .color(request.getColor())

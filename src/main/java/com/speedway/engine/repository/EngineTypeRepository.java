@@ -30,7 +30,7 @@ public class EngineTypeRepository implements Repository<EngineType, UUID> {
 
     @Override
     public List<EngineType> findAll() {
-        return entityManager.createQuery("select e from EngineType e", EngineType.class).getResultList();
+        return entityManager.createNamedQuery("EngineType.findAll", EngineType.class).getResultList();
     }
 
     public Optional<EngineType> findByName(String name){
@@ -38,7 +38,7 @@ public class EngineTypeRepository implements Repository<EngineType, UUID> {
         EngineProducers producer = EngineProducers.valueOf(nameTab[0]);
         int size = Integer.parseInt(nameTab[1]);
         try{
-            return Optional.of(entityManager.createQuery("select e from EngineType e where e.producer = :producer and e.size = :size", EngineType.class)
+            return Optional.of(entityManager.createNamedQuery("EngineType.findByName", EngineType.class)
                     .setParameter("producer", producer)
                     .setParameter("size", size)
                     .getSingleResult());

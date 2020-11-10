@@ -1,11 +1,9 @@
 package com.speedway.motorcycle.repository;
 
-import com.speedway.datastore.DataStore;
 import com.speedway.motorcycle.entity.Motorcycle;
 import com.speedway.repository.Repository;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -31,7 +29,7 @@ public class MotorcycleRepository implements Repository<Motorcycle, UUID> {
 
     @Override
     public List<Motorcycle> findAll() {
-        return entityManager.createQuery("select m from Motorcycle m", Motorcycle.class).getResultList();
+        return entityManager.createNamedQuery("Motorcycle.findAll", Motorcycle.class).getResultList();
     }
 
     @Override
@@ -56,7 +54,7 @@ public class MotorcycleRepository implements Repository<Motorcycle, UUID> {
 
     public List<Motorcycle> findMotorcycleByEngine(UUID id){
         try{
-            return entityManager.createQuery("select m from Motorcycle m where m.engineType.id = :id", Motorcycle.class)
+            return entityManager.createNamedQuery("Motorcycle.findMotorcycleByEngine", Motorcycle.class)
                     .setParameter("id", id)
                     .getResultList();
         } catch (NoResultException e) {

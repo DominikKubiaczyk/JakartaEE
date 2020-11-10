@@ -17,6 +17,16 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "engineTypes")
+@NamedQueries({
+        @NamedQuery(
+                name="EngineType.findAll",
+                query = "select e from EngineType e"
+        ),
+        @NamedQuery(
+                name = "EngineType.findByName",
+                query = "select e from EngineType e where e.producer = :producer and e.size = :size"
+        )
+})
 public class EngineType implements Serializable {
 
     @Id
